@@ -84,6 +84,14 @@ ALLOW_PRIVATE_ENDPOINTS=1   # only if you self-host and want localhost/LAN endpo
 PUBLIC_SITE_URL=           # used for the OpenRouter referer header
 ```
 
+## SEO
+
+- Full `metadata` in `src/app/layout.tsx`: title template, description, keywords, canonical, robots directives, and per-scheme theme colours
+- `src/app/manifest.ts` (PWA manifest), `src/app/robots.txt` and `src/app/sitemap.xml` via the Next metadata routes
+- `src/app/opengraph-image.tsx` generates the 1200×630 OG/Twitter card at build time with `next/og` — no image files to maintain
+- JSON-LD `@graph` with `WebApplication` + `Offer` and a `FAQPage` block matching the on-page questions
+- Crawlable on-page content in `src/components/Seo.tsx` (what it does, the six tones, privacy, FAQ) plus a visually-hidden `<h1>`
+
 ## PWA details
 
 The web app manifest is generated at `/manifest.webmanifest` by `src/app/manifest.ts`.

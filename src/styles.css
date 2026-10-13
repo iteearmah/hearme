@@ -70,6 +70,36 @@ select {
   color: inherit;
 }
 
+main:has(+ .seo-intro) {
+  padding-bottom: 28px;
+}
+
+.seo-intro,
+.seo-list + p,
+.seo-footer {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.seo-intro {
+  margin-top: 14px;
+}
+
+.seo-list,
+.card[aria-labelledby='seo-tones'],
+.card[aria-labelledby='seo-privacy'],
+.card[aria-labelledby='seo-faq'] {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card + .card,
+.seo-footer {
+  margin-top: 14px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -682,6 +712,111 @@ input[type='range']::-webkit-slider-thumb {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------- seo content ---------- */
+.seo-intro p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.seo-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.seo-intro em {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.seo-list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.seo-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.seo-list strong {
+  color: var(--text);
+}
+
+.seo-li-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.seo-faq details + details {
+  border-top: 1px solid var(--line);
+}
+
+.seo-faq summary {
+  cursor: pointer;
+  padding: 12px 2px;
+  font-weight: 650;
+  font-size: 14.5px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.seo-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.seo-faq summary::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  flex: none;
+}
+
+.seo-faq details[open] summary::after {
+  transform: rotate(-135deg);
+}
+
+.seo-faq details p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.seo-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12.5px;
+  padding: 8px 4px 4px;
+  line-height: 1.7;
+}
+
+.seo-footer p {
+  margin: 0 0 4px;
 }
 
 .sr-only {
