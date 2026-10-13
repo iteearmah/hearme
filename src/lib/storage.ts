@@ -87,14 +87,21 @@ export function saveHistory(h: HistoryItem[]) {
   }
 }
 
-export function applyTheme(theme: AppSettings["theme"]) {
-  const dark =
+export function resolveDark(theme: AppSettings["theme"]): boolean {
+  return (
     theme === "dark" ||
     (theme === "system" &&
       typeof matchMedia !== "undefined" &&
-      matchMedia("(prefers-color-scheme: dark)").matches);
+      matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+}
+
+/** Returns true when the dark theme is active after applying. */
+export function applyTheme(theme: AppSettings["theme"]): boolean {
+  const dark = resolveDark(theme);
   document.documentElement.dataset.theme = dark ? "dark" : "light";
   document
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute("content", dark ? "#141017" : "#fbf7fb");
+  return dark;
 }

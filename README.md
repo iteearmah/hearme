@@ -45,21 +45,16 @@ visitors need to configure nothing.
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173
+npm run dev          # http://localhost:3000
 ```
 
-The dev server needs the API function locally to do rewrites:
+`/api/chat` is a normal Next.js Route Handler, so `next dev` proxies it for you —
+no extra server needed.
 
 ```bash
-node scripts/dev-api.mjs                  # terminal 1 → :4199
-DEV_API_TARGET=http://localhost:4199 npm run dev   # terminal 2
-```
-
-Other scripts:
-
-```bash
-npm run build        # typecheck + production build
-npm run preview      # serve the built PWA
+npm run build        # production build (includes type checking)
+npm start            # serve the production build
+npm run typecheck    # tsc --noEmit
 npm run icons        # regenerate the PWA icon set from SVG (sharp)
 ```
 
@@ -71,8 +66,8 @@ vercel            # preview
 vercel --prod     # production
 ```
 
-Or import the repo at [vercel.com/new](https://vercel.com/new) — the framework preset
-is detected as Vite and `api/chat.ts` is deployed as a serverless function automatically.
+Or import the repo at [vercel.com/new](https://vercel.com/new) — the framework preset is
+detected as Next.js and `src/app/api/chat/route.ts` deploys as a serverless function.
 
 Optional environment variables (all optional — the keyless provider works with none of them):
 
@@ -88,14 +83,17 @@ PUBLIC_SITE_URL=           # used for the OpenRouter referer header
 
 ## PWA details
 
-`vite-plugin-pwa` (Workbox) generates a precache service worker with network-only handling
-for `/api/*`, so the app shell and your history work offline while rewrites obviously
-need a connection. Icons are generated from `scripts/gen-icons.mjs` (192/512 any + 512
+The web app manifest is generated at `/manifest.webmanifest` by `src/app/manifest.ts`.
+`public/sw.js` is a hand-written service worker that precaches the app shell and icons,
+serves hashed build output cache-first, uses network-first for navigations, and never
+touches `/api/*` — so the app and your history work offline while rewrites obviously need
+a connection. Icons are generated from `scripts/gen-icons.mjs` (192/512 any + 512
 maskable + 180 apple-touch-icon + favicon SVG/PNG), plus iOS meta tags, safe-area insets,
 `viewport-fit=cover`, an app shortcut, and a no-flash inline theme script.
 
 ## Stack
 
-React 19 · TypeScript · Vite 8 · vite-plugin-pwa · one tiny serverless function.
+Next.js 16 (App Router) · React 19 · TypeScript · one Route Handler.
 No UI framework, no state library, no CSS framework — hand-written CSS with
-light/dark themes and `prefers-reduced-motion` support.
+light/dark themes and `prefers-reduced-motion` support. The page is statically
+prerendered; only `/api/chat` runs on demand.
