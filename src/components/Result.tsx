@@ -1,5 +1,13 @@
 import { useState } from "react";
 import { toneById } from "../lib/prompt";
+import {
+  CompareIcon,
+  CopyIcon,
+  RefreshIcon,
+  ShareIcon,
+  SparkIcon,
+  TONE_ICONS,
+} from "./icons";
 
 export interface ResultData {
   output: string;
@@ -63,7 +71,7 @@ export function Result({
       <section className="card">
         <h2>Her version</h2>
         <div className="empty">
-          <div className="big">{"\u2728"}</div>
+          <SparkIcon size={38} strokeWidth={1.3} />
           <div>Your rewrite shows up here.</div>
         </div>
       </section>
@@ -71,6 +79,7 @@ export function Result({
   }
 
   const tone = toneById(data.tone as never);
+  const ToneIcon = TONE_ICONS[tone.id];
 
   return (
     <section className="card result">
@@ -81,6 +90,7 @@ export function Result({
           style={{ textTransform: "none", letterSpacing: 0 }}
           onClick={() => setShowOld((v) => !v)}
         >
+          <CompareIcon size={14} />
           {showOld ? "Hide yours" : "Compare"}
         </button>
       </h2>
@@ -95,7 +105,8 @@ export function Result({
 
       <div className="meta">
         <span className="pill">
-          {tone.emoji} {tone.label}
+          <ToneIcon size={13} />
+          {tone.label}
         </span>
         <span>softened {data.softness}</span>
         <span>· {data.model}</span>
@@ -103,12 +114,15 @@ export function Result({
 
       <div className="row" style={{ marginTop: 12 }}>
         <button className="btn primary" style={{ flex: 1 }} onClick={onCopy}>
+          <CopyIcon size={16} />
           Copy
         </button>
         <button className="btn" style={{ flex: 1 }} onClick={onShare}>
+          <ShareIcon size={16} />
           Share
         </button>
         <button className="btn" style={{ flex: 1 }} onClick={onRegenerate}>
+          <RefreshIcon size={16} />
           Again
         </button>
       </div>

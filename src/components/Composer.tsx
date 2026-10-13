@@ -1,6 +1,7 @@
 import { EXAMPLES, TONES, type ToneId } from "../lib/prompt";
 import type { AppSettings } from "../lib/storage";
 import { SwitchRow } from "./ui";
+import { SparkIcon, TONE_ICONS } from "./icons";
 
 export function Composer({
   draft,
@@ -52,7 +53,9 @@ export function Composer({
       <section className="card">
         <h2>How should it sound?</h2>
         <div className="chips">
-          {TONES.map((t) => (
+          {TONES.map((t) => {
+            const ToneIcon = TONE_ICONS[t.id];
+            return (
             <button
               key={t.id}
               type="button"
@@ -60,9 +63,11 @@ export function Composer({
               aria-pressed={settings.tone === t.id}
               onClick={() => patch({ tone: t.id as ToneId })}
             >
-              {t.emoji} {t.label}
-            </button>
-          ))}
+                <ToneIcon size={15} />
+                {t.label}
+              </button>
+            );
+          })}
         </div>
 
         <div className="field">
@@ -109,7 +114,14 @@ export function Composer({
         onClick={onConvert}
         disabled={busy || chars < 3}
       >
-        {busy ? "Rewriting…" : "Rewrite it \u2728"}
+        {busy ? (
+          "Rewriting…"
+        ) : (
+          <>
+            <SparkIcon size={18} />
+            Rewrite it
+          </>
+        )}
       </button>
     </>
   );

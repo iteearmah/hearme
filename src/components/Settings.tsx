@@ -3,6 +3,15 @@ import { providerById, PROVIDERS, type ProviderId } from "../lib/providers";
 import { testConnection } from "../lib/chat";
 import type { AppSettings } from "../lib/storage";
 import { SwitchRow } from "./ui";
+import {
+  AutoIcon,
+  EraserIcon,
+  FreeTagIcon,
+  KeyIcon,
+  LockIcon,
+  MoonIcon,
+  SunIcon,
+} from "./icons";
 
 export function Settings({
   settings,
@@ -53,7 +62,7 @@ export function Settings({
                 setTestResult(null);
               }}
             >
-              {p.keyless ? "\u{1F512} " : "\u{1F511} "}
+              {p.keyless ? <LockIcon size={14} /> : <KeyIcon size={14} />}
               {p.name}
             </button>
           ))}
@@ -96,7 +105,8 @@ export function Settings({
                 aria-pressed={settings.model === m}
                 onClick={() => patch({ model: m })}
               >
-                {m.replace(/-free$|:free$/, " \u{1F193}")}
+                {m.replace(/-free$|:free$/, "")}
+                {/-free$|:free$/.test(m) && <FreeTagIcon size={13} />}
               </button>
             ))}
           </div>
@@ -203,7 +213,8 @@ export function Settings({
               aria-pressed={settings.theme === t}
               onClick={() => patch({ theme: t })}
             >
-              {t === "system" ? "\u{1F318} Auto" : t === "light" ? "\u2600\uFE0F Light" : "\u{1F319} Dark"}
+              {t === "system" ? <AutoIcon size={14} /> : t === "light" ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+              {t === "system" ? "Auto" : t === "light" ? "Light" : "Dark"}
             </button>
           ))}
         </div>
@@ -223,6 +234,7 @@ export function Settings({
             }
           }}
         >
+          <EraserIcon size={15} />
           Remove API key
         </button>
         <button className="btn" style={{ flex: 1 }} onClick={onClose}>

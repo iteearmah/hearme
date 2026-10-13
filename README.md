@@ -94,6 +94,7 @@ maskable + 180 apple-touch-icon + favicon SVG/PNG), plus iOS meta tags, safe-are
 ## Stack
 
 Next.js 16 (App Router) · React 19 · TypeScript · one Route Handler.
-No UI framework, no state library, no CSS framework — hand-written CSS with
-light/dark themes and `prefers-reduced-motion` support. The page is statically
-prerendered; only `/api/chat` runs on demand.
+No UI framework, no state library, no CSS framework, and no icon font — every icon is a
+hand-drawn inline SVG in `src/components/icons.tsx` that inherits `currentColor`.
+Hand-written CSS with light/dark themes and `prefers-reduced-motion` support. The page is
+statically prerendered; only `/api/chat` runs on demand.

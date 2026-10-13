@@ -1,4 +1,5 @@
 import { TONES, toneById } from "../lib/prompt";
+import { ClockIcon, EraserIcon, PinIcon, TrashIcon, TONE_ICONS } from "./icons";
 import type { HistoryItem } from "../lib/storage";
 import { timeAgo } from "./Result";
 
@@ -22,7 +23,7 @@ export function History({
       <section className="card">
         <h2>History</h2>
         <div className="empty">
-          <div className="big">📅</div>
+          <ClockIcon size={38} strokeWidth={1.3} />
           <div>Nothing yet. Your rewrites are saved on this device only.</div>
         </div>
       </section>
@@ -34,6 +35,7 @@ export function History({
 
   const render = (item: HistoryItem, idx: number) => {
     const tone = toneById(item.tone);
+    const ToneIcon = TONE_ICONS[tone.id];
     return (
       <div
         key={item.id}
@@ -48,7 +50,8 @@ export function History({
           onKeyDown={(e) => e.key === "Enter" && onOpen(item)}
         >
           <span>
-            {tone.emoji} {tone.label} · {timeAgo(item.createdAt)}
+            <ToneIcon size={12} />
+            {tone.label} · {timeAgo(item.createdAt)}
           </span>
           <span
             role="button"
@@ -65,7 +68,7 @@ export function History({
               }
             }}
           >
-            {item.favourite ? "\u{1F4CC}" : "\u{1F4CC}\uFE0E"}
+            <PinIcon size={15} filled={item.favourite} />
           </span>
         </div>
         <div
@@ -97,6 +100,7 @@ export function History({
             onClick={() => onDelete(item.id)}
             aria-label="Delete this rewrite"
           >
+            <TrashIcon size={14} />
             Delete
           </button>
         </div>
@@ -116,6 +120,7 @@ export function History({
         <h2>
           Recent
           <button className="chip" onClick={onClear}>
+            <EraserIcon size={14} />
             Clear all
           </button>
         </h2>

@@ -80,13 +80,16 @@ export function Sheet({
   );
 }
 
-export function Toast({ message }: { message: string | null }) {
+export function Toast({ message }: { message: ReactNode | null }) {
   if (!message) return null;
   return (
     <div
       role="status"
       className="toast"
       style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 7,
         position: "fixed",
         left: "50%",
         bottom: "calc(96px + env(safe-area-inset-bottom, 0px))",
@@ -101,7 +104,6 @@ export function Toast({ message }: { message: string | null }) {
         boxShadow: "var(--shadow)",
         animation: "rise .2s ease both",
         pointerEvents: "none",
-        whiteSpace: "nowrap",
         maxWidth: "90vw",
         overflow: "hidden",
         textOverflow: "ellipsis",

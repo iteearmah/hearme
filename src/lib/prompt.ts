@@ -9,14 +9,12 @@ export type ToneId =
 export const TONES: {
   id: ToneId;
   label: string;
-  emoji: string;
   blurb: string;
   directive: string;
 }[] = [
   {
     id: "gentle",
     label: "Gentle",
-    emoji: "\u{1F49C}",
     blurb: "Soft, de-escalating",
     directive:
       "Lower the temperature. Speak slowly and softly in feeling. Remove anything that sounds like a verdict.",
@@ -24,7 +22,6 @@ export const TONES: {
   {
     id: "warm",
     label: "Warm",
-    emoji: "\u{1F525}",
     blurb: "Affectionate, caring",
     directive:
       "Lead with warmth and appreciation. Name the love and the care behind the point before the point itself.",
@@ -32,7 +29,6 @@ export const TONES: {
   {
     id: "playful",
     label: "Playful",
-    emoji: "\u{1F604}",
     blurb: "Light, flirty",
     directive:
       "Keep it light and gently teasing with warmth. A little humour or affection is welcome, never sarcasm or a jab.",
@@ -40,7 +36,6 @@ export const TONES: {
   {
     id: "apologetic",
     label: "Accountable",
-    emoji: "\u{1F64F}",
     blurb: "Own your part",
     directive:
       "Take responsibility for your part without excuses or 'but'. No hollow 'if I hurt you, I'm sorry' filler \u2014 be specific about what you did and what you'll do.",
@@ -48,7 +43,6 @@ export const TONES: {
   {
     id: "reassuring",
     label: "Reassuring",
-    emoji: "\u{1F49B}",
     blurb: "Safety first",
     directive:
       "Address her feeling of being unheard or unsafe. Validate first, then explain your reasoning in plain language.",
@@ -56,7 +50,6 @@ export const TONES: {
   {
     id: "straight",
     label: "Firm but kind",
-    emoji: "\u{1F4AA}",
     blurb: "Still honest, softer",
     directive:
       "Keep the point and the boundary intact. Do not become a pushover \u2014 just deliver the same truth without coldness.",

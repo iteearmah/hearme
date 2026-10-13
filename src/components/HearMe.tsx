@@ -1,11 +1,27 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { Composer } from "./Composer";
 import { History } from "./History";
 import { Result, type ResultData } from "./Result";
 import { Settings } from "./Settings";
 import { Toast } from "./ui";
+import {
+  CheckIcon,
+  ClockIcon,
+  LogoMark,
+  MoonIcon,
+  SlidersIcon,
+  SparkIcon,
+  SunIcon,
+} from "./icons";
 import { ChatError, rewrite } from "../lib/chat";
 import { providerById } from "../lib/providers";
 import { buildSystemPrompt, buildUserPrompt } from "../lib/prompt";
@@ -30,7 +46,7 @@ export default function App() {
   const [result, setResult] = useState<ResultData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [toast, setToast] = useState<string | null>(null);
+  const [toast, setToast] = useState<ReactNode | null>(null);
   const [isDark, setIsDark] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -57,7 +73,7 @@ export default function App() {
     setSettings((s) => ({ ...s, ...p }));
   }, []);
 
-  const showToast = useCallback((m: string) => {
+  const showToast = useCallback((m: ReactNode) => {
     setToast(m);
     setTimeout(() => setToast(null), 1900);
   }, []);
@@ -125,7 +141,12 @@ export default function App() {
   const copy = async (value: string) => {
     try {
       await navigator.clipboard.writeText(value);
-      showToast("Copied 👍");
+      showToast(
+        <>
+          <CheckIcon size={15} />
+          Copied
+        </>,
+      );
     } catch {
       const ta = document.createElement("textarea");
       ta.value = value;
@@ -133,7 +154,12 @@ export default function App() {
       ta.select();
       document.execCommand("copy");
       ta.remove();
-      showToast("Copied 👍");
+      showToast(
+        <>
+          <CheckIcon size={15} />
+          Copied
+        </>,
+      );
     }
   };
 
@@ -149,10 +175,10 @@ export default function App() {
     await copy(value);
   };
 
-  const tabs: { id: Tab; label: string; icon: string }[] = [
-    { id: "write", label: "Rewrite", icon: "\u2728" },
-    { id: "history", label: "History", icon: "\u{1F4C5}" },
-    { id: "settings", label: "Provider", icon: "\u2699\uFE0F" },
+  const tabs: { id: Tab; label: string; icon: ReactNode }[] = [
+    { id: "write", label: "Rewrite", icon: <SparkIcon size={19} /> },
+    { id: "history", label: "History", icon: <ClockIcon size={19} /> },
+    { id: "settings", label: "Provider", icon: <SlidersIcon size={19} /> },
   ];
 
   return (
@@ -160,7 +186,7 @@ export default function App() {
       <header className="appbar">
         <div className="brand">
           <div className="logo" aria-hidden="true">
-            {"\u{1F48C}"}
+            <LogoMark size={19} />
           </div>
           <span>HearMe</span>
         </div>
@@ -173,7 +199,7 @@ export default function App() {
           aria-label="Toggle theme"
           onClick={() => patch({ theme: isDark ? "light" : "dark" })}
         >
-          {isDark ? "\u2600\uFE0F" : "\u{1F319}"}
+          {isDark ? <SunIcon size={18} /> : <MoonIcon size={18} />}
         </button>
       </header>
 
@@ -225,7 +251,12 @@ export default function App() {
               if (confirm("Clear all history?")) {
                 setHistory([]);
                 saveHistory([]);
-                showToast("History cleared");
+                showToast(
+                  <>
+                    <CheckIcon size={15} />
+                    History cleared
+                  </>,
+                );
               }
             }}
             onToggleFav={(id) =>

@@ -145,6 +145,9 @@ select {
 }
 
 .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -228,6 +231,9 @@ main {
 }
 
 .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 1px solid var(--line);
   background: var(--surface-2);
   border-radius: 999px;
@@ -379,6 +385,10 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   border: none;
   border-radius: 14px;
   padding: 13px 16px;
@@ -450,6 +460,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .meta {
+  align-items: center;
   font-size: 11.5px;
   color: var(--muted);
   margin-top: 10px;
@@ -527,6 +538,12 @@ input[type='range']::-webkit-slider-thumb {
   margin-bottom: 5px;
 }
 
+.history-item .hi-top > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .history-item .hi-text {
   font-size: 14px;
   line-height: 1.45;
@@ -543,8 +560,15 @@ input[type='range']::-webkit-slider-thumb {
   color: var(--muted);
 }
 
+.empty svg,
 .empty .big {
-  font-size: 34px;
+  color: color-mix(in oklab, var(--brand) 55%, var(--muted));
+  margin-bottom: 4px;
+}
+
+.empty > div:first-child {
+  display: flex;
+  justify-content: center;
 }
 
 /* ---------- tabbar ---------- */
