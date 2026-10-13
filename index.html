@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"
+    />
+    <title>HearMe — say what you mean, in a way she'll actually hear</title>
+    <meta
+      name="description"
+      content="Rewrite blunt, logical messages into warm, emotionally intelligent ones she will actually want to hear. Installable PWA, works offline, free AI providers."
+    />
+    <meta name="theme-color" content="#fbf7fb" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="HearMe" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="HearMe" />
+    <meta
+      property="og:description"
+      content="Turn blunt logic into warmth. A private, installable PWA."
+    />
+    <meta property="og:type" content="website" />
+    <script>
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem("hearme.settings.v1") || "{}");
+          var t = s.theme || "system";
+          var dark =
+            t === "dark" ||
+            (t === "system" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.dataset.theme = dark ? "dark" : "light";
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", dark ? "#141017" : "#fbf7fb");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
