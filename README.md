@@ -1,5 +1,8 @@
 # HearMe
 
+**Live app: [hearme.vercel.app](https://hearme.vercel.app)** — install it from the browser
+(Add to Home Screen) and it runs full-screen like a native app.
+
 An installable PWA that rewrites blunt, logical "solving-the-problem" messages into
 the warm, emotionally intelligent version she'll actually want to hear — then gets out
 of the way so you can send it.
